@@ -3,7 +3,7 @@
 Container that backs up etcd configuration to S3. The container overwrites the same S3 object every time it is run, it is recommended you turn
 versioning on to retain access to previous copies.
 
-There is an existing image available on the public registry at `[iainmckay/etcd-backup](https://registry.hub.docker.com/u/iainmckay/etcd-backup/)`.
+There is an existing image available on the public registry at [iainmckay/etcd-backup](https://registry.hub.docker.com/u/iainmckay/etcd-backup/).
 
 ## Backing up etcd
 
