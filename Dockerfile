@@ -7,18 +7,12 @@ ENV ETCD_PORT 4001
 ENV S3_OBJECT etcd.json
 
 RUN apt-get update \
-    && apt-get install -yq --no-install-recommends python-pip \
+    && apt-get install -yq --no-install-recommends git nodejs npm python-pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
+    && ln -s /usr/bin/nodejs /usr/bin/node \
     && pip install awscli
-
-RUN apt-get update \
-    && apt-get install -yq --no-install-recommends git nodejs npm \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN npm install -g git+https://github.com/tombburnell/etcd-dump.git
 
