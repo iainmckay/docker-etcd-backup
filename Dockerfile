@@ -4,7 +4,7 @@ MAINTAINER Iain Mckay <me@iainmckay.co.uk>
 ENV DEBIAN_FRONTEND noninteractive
 ENV ETCD_IP 172.17.42.1
 ENV ETCD_PORT 4001
-ENV S3_OBJECT "etcd.json"
+ENV S3_OBJECT etcd.json
 
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends python-pip \
