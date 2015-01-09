@@ -1,13 +1,9 @@
 FROM ubuntu:14.04
 MAINTAINER Iain Mckay <me@iainmckay.co.uk>
 
-ENV AWS_ACCESS_KEY_ID "" 
-ENV AWS_SECRET_ACCESS_KEY ""
-ENV AWS_DEFAULT_REGION ""
 ENV DEBIAN_FRONTEND noninteractive
 ENV ETCD_IP 172.17.42.1
 ENV ETCD_PORT 4001
-ENV S3_BUCKET ""
 ENV S3_OBJECT "etcd.json"
 
 RUN apt-get update \
