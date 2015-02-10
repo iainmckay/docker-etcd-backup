@@ -11,25 +11,29 @@ else
     exit 64
 fi
 
-if ["$MODE" == "restore"]; then
-    aws s3 cp s3://$S3_BUCKET/$S3_OBJECT /tmp/dump.json
+if [ "$MODE" == "restore" ]; then
+    if [ -f /tmp/dump.json ]; then
+        echo "dump.json already provided, skipping download"
+    else
+        aws s3 cp s3://$S3_BUCKET/$S3_OBJECT /tmp/dump.json
 
-    if [ $? != 0]; then
-        >&2 echo "There was a problem fetching the backup from S3"
-        exit $?
+        if [ $? != 0]; then
+            >&2 echo "There was a problem fetching the backup from S3"
+            exit $?
+        fi
     fi
 fi
 
 etcd-dump -h $ETCD_IP -p $ETCD_PORT -f /tmp/dump.json $MODE
 
-if [ $? != 0]; then
+if [ $? != 0 ]; then
     exit $?
 fi
 
-if ["$MODE" == "backup"]; then
+if [ "$MODE" == "backup" ]; then
     aws s3 cp /tmp/dump.json s3://$S3_BUCKET/$S3_OBJECT
 
-    if [ $? != 0]; then
+    if [ $? != 0 ]; then
         exit $?
     fi
 fi
