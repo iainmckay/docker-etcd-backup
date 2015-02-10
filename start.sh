@@ -17,7 +17,7 @@ if [ "$MODE" == "restore" ]; then
     else
         aws s3 cp s3://$S3_BUCKET/$S3_OBJECT /tmp/dump.json
 
-        if [ $? != 0]; then
+        if [ $? != 0 ]; then
             >&2 echo "There was a problem fetching the backup from S3"
             exit $?
         fi
