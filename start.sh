@@ -12,7 +12,7 @@ else
 fi
 
 if [ "$MODE" == "restore" ]; then
-    if [ -f /tmp/dump.json ]; then
+    if [ -f "/tmp/dump.json" ]; then
         echo "dump.json already provided, skipping download"
     else
         aws s3 cp s3://$S3_BUCKET/$S3_OBJECT /tmp/dump.json
