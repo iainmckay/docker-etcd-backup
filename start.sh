@@ -30,7 +30,7 @@ if [ $? != 0 ]; then
     exit $?
 fi
 
-if [ "$MODE" == "backup" ]; then
+if [ "$MODE" == "dump" ]; then
     aws s3 cp /tmp/dump.json s3://$S3_BUCKET/$S3_OBJECT
 
     if [ $? != 0 ]; then
