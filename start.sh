@@ -1,6 +1,7 @@
 #!/bin/bash
 
 MODE=
+KEY=
 
 if [ "$1" == "backup" ]; then
     MODE='dump'
@@ -9,6 +10,12 @@ elif [ "$1" == "restore" ]; then
 else
     >&2 echo "You must provide either backup or restore to run this container"
     exit 64
+fi
+
+if [ -z "$2" ]; then
+    KEY=/
+else
+    KEY=$2
 fi
 
 if [ "$MODE" == "restore" ]; then
@@ -22,6 +29,9 @@ if [ "$MODE" == "restore" ]; then
             exit $?
         fi
     fi
+
+    jq '[.[] | select(.key | startswith("'"$KEY"'"))]' /tmp/dump.json > /tmp/tmp.json
+    mv /tmp/tmp.json /tmp/dump.json
 fi
 
 etcd-dump -h $ETCD_IP -p $ETCD_PORT -f /tmp/dump.json $MODE
