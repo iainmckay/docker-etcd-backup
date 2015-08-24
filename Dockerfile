@@ -6,8 +6,10 @@ ENV ETCD_IP 172.17.42.1
 ENV ETCD_PORT 4001
 ENV S3_OBJECT etcd.json
 
-RUN apt-get update \
-    && apt-get install -yq --no-install-recommends git nodejs npm python-pip \
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list \
+    && apt-get update \
+    && apt-get upgrade -yq \
+    && apt-get install -yq --no-install-recommends git jq/trusty-backports nodejs npm python-pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
